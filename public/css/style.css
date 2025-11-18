@@ -723,6 +723,9 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
 
 .welcome-image {
     width: 100%;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 .welcome-image img {
@@ -732,10 +735,16 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     object-fit: cover;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 .welcome-text {
     text-align: left;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 .welcome-section h2 {
@@ -2251,6 +2260,22 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
     .welcome-text {
         text-align: center;
     }
+    
+    /* Ensure welcome section is completely static on mobile */
+    .welcome-section .welcome-image,
+    .welcome-section .welcome-text {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .welcome-section .welcome-image img {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
 
     .services-grid {
         grid-template-columns: 1fr;
@@ -2380,6 +2405,18 @@ h1, h2, h3, h4, h5, h6, p, span, div, a, li, td, th {
         max-width: 100%;
         overflow: hidden;
         word-wrap: break-word;
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+    
+    .welcome-section .welcome-image,
+    .welcome-section .welcome-text {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
     }
     
     .service-card img,

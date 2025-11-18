@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Shipment - Admin</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <style>
+        .admin-header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        .admin-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .admin-nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .admin-nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            background: #ff6b35;
+        }
+        .form-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin-bottom: 30px;
+        }
+        .form-section {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .form-section:last-child {
+            border-bottom: none;
+        }
+        .form-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff6b35;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        .form-group textarea {
+            resize: vertical;
+        }
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+        }
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .history-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .history-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+        }
+        .history-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .required {
+            color: #e74c3c;
+        }
+        .notification-info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3498db;
+        }
+        @media (max-width: 768px) {
+            .form-row, .form-row-3 {
+                grid-template-columns: 1fr;
+            }
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <div class="container">
+            <h2>Admin Panel - Tronixs Express</h2>
+            <div class="admin-nav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="shipments.html">Shipments</a>
+                <a href="add-shipment.html">Add Shipment</a>
+                <a href="quotes.html">Quotes</a>
+                <a href="login.html" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Edit Shipment: TRX123456789</h1>
+        
+        <div class="form-container">
+            <div class="notification-info">
+                <strong>📧 Email & SMS Notifications:</strong> When you update the shipment status or add a tracking update, both sender and recipient will automatically receive email and SMS notifications.
+            </div>
+            
+            <form>
+                <!-- Tracking Information -->
+                <div class="form-section">
+                    <h3>Tracking Information</h3>
+                    <div class="form-group">
+                        <label>Tracking Number</label>
+                        <input type="text" value="TRX123456789" disabled>
+                        <small style="color: #666;">Tracking number cannot be changed</small>
+                    </div>
+                </div>
+
+                <!-- Sender Information -->
+                <div class="form-section">
+                    <h3>Sender Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Sender Name</label>
+                            <input type="text" name="sender_name" value="John Smith">
+                        </div>
+                        <div class="form-group">
+                            <label>Sender Email <span class="required">*</span></label>
+                            <input type="email" name="sender_email" required value="john.smith@email.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Sender Phone <span class="required">*</span></label>
+                            <input type="tel" name="sender_phone" required value="+1 (555) 123-4567">
+                        </div>
+                        <div class="form-group">
+                            <label>Sender Country</label>
+                            <input type="text" name="sender_country" value="United States">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Sender Address</label>
+                        <textarea name="sender_address" rows="2">123 Main St, New York, NY 10001</textarea>
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" name="sender_city" value="New York">
+                        </div>
+                        <div class="form-group">
+                            <label>State/Province</label>
+                            <input type="text" name="sender_state" value="NY">
+                        </div>
+                        <div class="form-group">
+                            <label>ZIP/Postal Code</label>
+                            <input type="text" name="sender_zip" value="10001">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recipient Information -->
+                <div class="form-section">
+                    <h3>Recipient Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Recipient Name</label>
+                            <input type="text" name="recipient_name" value="Jane Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Recipient Email <span class="required">*</span></label>
+                            <input type="email" name="recipient_email" required value="jane.doe@email.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Recipient Phone <span class="required">*</span></label>
+                            <input type="tel" name="recipient_phone" required value="+44 20 1234 5678">
+                        </div>
+                        <div class="form-group">
+                            <label>Recipient Country</label>
+                            <input type="text" name="recipient_country" value="United Kingdom">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Recipient Address</label>
+                        <textarea name="recipient_address" rows="2">456 Oak Ave, London, UK</textarea>
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" name="recipient_city" value="London">
+                        </div>
+                        <div class="form-group">
+                            <label>State/Province</label>
+                            <input type="text" name="recipient_state" value="England">
+                        </div>
+                        <div class="form-group">
+                            <label>ZIP/Postal Code</label>
+                            <input type="text" name="recipient_zip" value="SW1A 1AA">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipping Details -->
+                <div class="form-section">
+                    <h3>Shipping Details</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Origin</label>
+                            <input type="text" name="origin" value="New York, USA">
+                        </div>
+                        <div class="form-group">
+                            <label>Destination</label>
+                            <input type="text" name="destination" value="London, UK">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Service Type</label>
+                            <select name="service_type">
+                                <option value="">Select Service</option>
+                                <option value="Air Freight" selected>Air Freight</option>
+                                <option value="Road Freight">Road Freight</option>
+                                <option value="Ocean Freight">Ocean Freight</option>
+                                <option value="Rail Freight">Rail Freight</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select name="status">
+                                <option value="Pending">Pending</option>
+                                <option value="Processing">Processing</option>
+                                <option value="In Transit" selected>In Transit</option>
+                                <option value="Out for Delivery">Out for Delivery</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Location</label>
+                        <input type="text" name="current_location" value="London, UK">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Estimated Delivery Date</label>
+                            <input type="date" name="estimated_delivery_date" value="2024-01-20">
+                        </div>
+                        <div class="form-group">
+                            <label>Actual Delivery Date</label>
+                            <input type="date" name="actual_delivery_date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Notes</label>
+                        <textarea name="delivery_notes" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <!-- Cargo Information -->
+                <div class="form-section">
+                    <h3>Cargo Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Cargo Type</label>
+                            <select name="cargo_type">
+                                <option value="">Select Cargo Type</option>
+                                <option value="Electronics" selected>Electronics</option>
+                                <option value="General">General Cargo</option>
+                                <option value="Clothing">Clothing & Textiles</option>
+                                <option value="Food">Food & Beverages</option>
+                                <option value="Machinery">Machinery & Equipment</option>
+                                <option value="Pharmaceuticals">Pharmaceuticals</option>
+                                <option value="Automotive">Automotive Parts</option>
+                                <option value="Documents">Documents</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" name="quantity" min="1" value="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Cargo Description</label>
+                        <textarea name="cargo_description" rows="3">Electronics shipment - 50kg, 120x80x60cm</textarea>
+                    </div>
+                </div>
+
+                <!-- Weight & Dimensions -->
+                <div class="form-section">
+                    <h3>Weight & Dimensions</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Weight</label>
+                            <input type="number" name="weight" step="0.01" min="0" value="50.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Weight Unit</label>
+                            <select name="weight_unit">
+                                <option value="kg" selected>Kilograms (kg)</option>
+                                <option value="lbs">Pounds (lbs)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-group">
+                            <label>Length</label>
+                            <input type="number" name="length" step="0.01" min="0" value="120.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Width</label>
+                            <input type="number" name="width" step="0.01" min="0" value="80.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Height</label>
+                            <input type="number" name="height" step="0.01" min="0" value="60.00">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Dimension Unit</label>
+                        <select name="dimension_unit">
+                            <option value="cm" selected>Centimeters (cm)</option>
+                            <option value="in">Inches (in)</option>
+                            <option value="m">Meters (m)</option>
+                            <option value="ft">Feet (ft)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Value & Insurance -->
+                <div class="form-section">
+                    <h3>Value & Insurance</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Declared Value</label>
+                            <input type="number" name="declared_value" step="0.01" min="0" value="5000.00">
+                        </div>
+                        <div class="form-group">
+                            <label>Currency</label>
+                            <select name="currency">
+                                <option value="USD" selected>USD ($)</option>
+                                <option value="EUR">EUR (€)</option>
+                                <option value="GBP">GBP (£)</option>
+                                <option value="CAD">CAD ($)</option>
+                                <option value="AUD">AUD ($)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="insurance" value="1" checked>
+                            Require Insurance
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Insurance Value</label>
+                        <input type="number" name="insurance_value" step="0.01" min="0" value="5000.00">
+                    </div>
+                </div>
+
+                <!-- Special Requirements -->
+                <div class="form-section">
+                    <h3>Special Requirements</h3>
+                    <div class="checkbox-group">
+                        <label>
+                            <input type="checkbox" name="fragile" value="1" checked>
+                            Fragile - Handle with Care
+                        </label>
+                        <label>
+                            <input type="checkbox" name="hazardous" value="1">
+                            Hazardous Materials
+                        </label>
+                        <label>
+                            <input type="checkbox" name="temperature_controlled" value="1">
+                            Temperature Controlled
+                        </label>
+                        <label>
+                            <input type="checkbox" name="requires_signature" value="1" checked>
+                            Requires Signature on Delivery
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label>Special Instructions</label>
+                        <textarea name="special_instructions" rows="3">Handle with extreme care. Fragile electronics inside.</textarea>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-primary">Update Shipment & Send Notifications</button>
+                <a href="shipments.html" style="margin-left: 10px; color: #666;">Back to Shipments</a>
+            </form>
+        </div>
+        
+        <div class="history-container">
+            <h2>Tracking History</h2>
+            
+            <div class="history-form">
+                <h3>Add New Tracking Update</h3>
+                <div class="notification-info">
+                    <strong>📧 Automatic Notifications:</strong> Adding a tracking update will automatically send email and SMS notifications to both sender and recipient.
+                </div>
+                <form>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Status <span class="required">*</span></label>
+                            <select name="new_status" required>
+                                <option value="">Select Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Processing">Processing</option>
+                                <option value="In Transit" selected>In Transit</option>
+                                <option value="Out for Delivery">Out for Delivery</option>
+                                <option value="Delivered">Delivered</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Location <span class="required">*</span></label>
+                            <input type="text" name="new_location" required placeholder="Current location">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes</label>
+                        <textarea name="new_notes" rows="2" placeholder="Additional notes about this update"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Add Tracking Update & Send Notifications</button>
+                </form>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <div class="history-item">
+                    <strong>In Transit</strong> - London, UK
+                    <br><small style="color: #666;">Shipment in transit to destination</small>
+                    <br><small style="color: #999;">Jan 15, 2024 14:30</small>
+                </div>
+                <div class="history-item">
+                    <strong>Processing</strong> - New York, USA
+                    <br><small style="color: #666;">Package processed at origin facility</small>
+                    <br><small style="color: #999;">Jan 15, 2024 10:15</small>
+                </div>
+                <div class="history-item">
+                    <strong>Pending</strong> - New York, USA
+                    <br><small style="color: #666;">Shipment created</small>
+                    <br><small style="color: #999;">Jan 15, 2024 08:00</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Authentication check - redirect to login if not authenticated
+        (function() {
+            if (sessionStorage.getItem('adminAuthenticated') !== 'true') {
+                window.location.href = 'login.html';
+            }
+        })();
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('adminAuthenticated');
+            sessionStorage.removeItem('adminUsername');
+            sessionStorage.removeItem('adminLoginTime');
+            window.location.href = 'login.html';
+        }
+
+        // Handle logout link clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutLink = document.querySelector('a[href="login.html"]');
+            if (logoutLink && logoutLink.textContent.includes('Logout')) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logout();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

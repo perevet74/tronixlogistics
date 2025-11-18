@@ -582,10 +582,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Scroll Animation Handler
     function initScrollAnimations() {
-        const animatedElements = document.querySelectorAll('.scroll-animate');
+        // Exclude welcome section from animations - keep it static
+        const animatedElements = document.querySelectorAll('.scroll-animate:not(.welcome-section .scroll-animate):not(.welcome-image):not(.welcome-text)');
+        
+        // Also explicitly exclude welcome section elements
+        const allAnimated = document.querySelectorAll('.scroll-animate');
+        const filteredElements = Array.from(allAnimated).filter(el => {
+            return !el.closest('.welcome-section');
+        });
         
         // If no animated elements, don't enable animations
-        if (animatedElements.length === 0) {
+        if (filteredElements.length === 0) {
             return;
         }
 
@@ -604,8 +611,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // First, mark all elements in viewport as animated (so they stay visible)
-        animatedElements.forEach(element => {
-            if (isInViewport(element)) {
+        // Exclude welcome section elements
+        filteredElements.forEach(element => {
+            if (!element.closest('.welcome-section') && isInViewport(element)) {
                 element.classList.add('animated');
             }
         });
@@ -618,7 +626,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Function to handle scroll animations
         function handleScrollAnimations() {
-            animatedElements.forEach(element => {
+            filteredElements.forEach(element => {
+                // Skip welcome section elements completely
+                if (element.closest('.welcome-section')) {
+                    return;
+                }
+                
                 if (isInViewport(element) && !element.classList.contains('animated')) {
                     element.classList.add('animated');
                 } else if (!isInViewport(element) && element.classList.contains('animated')) {

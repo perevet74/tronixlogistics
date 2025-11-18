@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Requests - Admin</title>
+    <link rel="stylesheet" href="/public/css/style.css">
+    <style>
+        .admin-header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 20px 0;
+            margin-bottom: 30px;
+        }
+        .admin-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .admin-nav {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .admin-nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            background: #ff6b35;
+        }
+        .table-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        tr:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <div class="container">
+            <h2>Admin Panel - Tronixs Express</h2>
+            <div class="admin-nav">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="shipments.html">Shipments</a>
+                <a href="add-shipment.html">Add Shipment</a>
+                <a href="quotes.html" class="active">Quotes</a>
+                <a href="login.html" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Quote Requests</h1>
+        
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Service Type</th>
+                        <th>Origin</th>
+                        <th>Destination</th>
+                        <th>Weight</th>
+                        <th>Dimensions</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John Smith</td>
+                        <td>john.smith@email.com</td>
+                        <td>+1 (555) 123-4567</td>
+                        <td>Air Freight</td>
+                        <td>New York, USA</td>
+                        <td>London, UK</td>
+                        <td>50 kg</td>
+                        <td>120x80x60 cm</td>
+                        <td>Jan 15, 2024</td>
+                    </tr>
+                    <tr>
+                        <td>Sarah Johnson</td>
+                        <td>sarah.j@email.com</td>
+                        <td>+1 (555) 234-5678</td>
+                        <td>Ocean Freight</td>
+                        <td>Los Angeles, USA</td>
+                        <td>Shanghai, China</td>
+                        <td>500 kg</td>
+                        <td>200x150x100 cm</td>
+                        <td>Jan 14, 2024</td>
+                    </tr>
+                    <tr>
+                        <td>Michael Brown</td>
+                        <td>m.brown@email.com</td>
+                        <td>+1 (555) 345-6789</td>
+                        <td>Road Freight</td>
+                        <td>Chicago, USA</td>
+                        <td>Toronto, Canada</td>
+                        <td>200 kg</td>
+                        <td>150x100x80 cm</td>
+                        <td>Jan 13, 2024</td>
+                    </tr>
+                    <tr>
+                        <td>Emily Davis</td>
+                        <td>emily.d@email.com</td>
+                        <td>+1 (555) 456-7890</td>
+                        <td>Air Freight</td>
+                        <td>Miami, USA</td>
+                        <td>Mexico City, Mexico</td>
+                        <td>25 kg</td>
+                        <td>80x60x40 cm</td>
+                        <td>Jan 12, 2024</td>
+                    </tr>
+                    <tr>
+                        <td>David Wilson</td>
+                        <td>d.wilson@email.com</td>
+                        <td>+1 (555) 567-8901</td>
+                        <td>Rail Freight</td>
+                        <td>Seattle, USA</td>
+                        <td>Vancouver, Canada</td>
+                        <td>1000 kg</td>
+                        <td>300x200x150 cm</td>
+                        <td>Jan 11, 2024</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        // Authentication check - redirect to login if not authenticated
+        (function() {
+            if (sessionStorage.getItem('adminAuthenticated') !== 'true') {
+                window.location.href = 'login.html';
+            }
+        })();
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('adminAuthenticated');
+            sessionStorage.removeItem('adminUsername');
+            sessionStorage.removeItem('adminLoginTime');
+            window.location.href = 'login.html';
+        }
+
+        // Handle logout link clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutLink = document.querySelector('a[href="login.html"]');
+            if (logoutLink && logoutLink.textContent.includes('Logout')) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logout();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
