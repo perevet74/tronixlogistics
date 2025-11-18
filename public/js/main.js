@@ -584,6 +584,11 @@ document.addEventListener('DOMContentLoaded', function() {
     function initScrollAnimations() {
         const animatedElements = document.querySelectorAll('.scroll-animate');
         
+        // If no animated elements, don't enable animations
+        if (animatedElements.length === 0) {
+            return;
+        }
+
         // Function to check if element is in viewport
         function isInViewport(element) {
             const rect = element.getBoundingClientRect();
@@ -597,6 +602,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 rect.right <= windowWidth
             );
         }
+
+        // First, mark all elements in viewport as animated (so they stay visible)
+        animatedElements.forEach(element => {
+            if (isInViewport(element)) {
+                element.classList.add('animated');
+            }
+        });
+
+        // Then add animations-enabled class (this will hide elements NOT in viewport)
+        // Use setTimeout to ensure DOM is ready
+        setTimeout(function() {
+            document.body.classList.add('animations-enabled');
+        }, 50);
 
         // Function to handle scroll animations
         function handleScrollAnimations() {
@@ -614,9 +632,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }
-
-        // Initial check
-        handleScrollAnimations();
 
         // Throttle scroll event for better performance
         let ticking = false;

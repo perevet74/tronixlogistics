@@ -4,68 +4,74 @@
    ============================================ */
 
 /* Scroll Animation Classes */
+/* Elements are visible by default - animations are enhancement only */
 .scroll-animate {
-    opacity: 0;
+    opacity: 1 !important;
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.scroll-animate.fade-in {
+/* Only apply animation states if animations are enabled AND element hasn't been animated yet */
+.animations-enabled .scroll-animate:not(.animated) {
+    opacity: 0;
+}
+
+.animations-enabled .scroll-animate.fade-in:not(.animated) {
     opacity: 0;
     transform: translateY(30px);
 }
 
-.scroll-animate.fade-in.animated {
-    opacity: 1;
+.animations-enabled .scroll-animate.fade-in.animated {
+    opacity: 1 !important;
     transform: translateY(0);
 }
 
-.scroll-animate.slide-up {
+.animations-enabled .scroll-animate.slide-up:not(.animated) {
     opacity: 0;
     transform: translateY(50px);
 }
 
-.scroll-animate.slide-up.animated {
-    opacity: 1;
+.animations-enabled .scroll-animate.slide-up.animated {
+    opacity: 1 !important;
     transform: translateY(0);
 }
 
-.scroll-animate.slide-down {
+.animations-enabled .scroll-animate.slide-down:not(.animated) {
     opacity: 0;
     transform: translateY(-50px);
 }
 
-.scroll-animate.slide-down.animated {
-    opacity: 1;
+.animations-enabled .scroll-animate.slide-down.animated {
+    opacity: 1 !important;
     transform: translateY(0);
 }
 
-.scroll-animate.slide-left {
+.animations-enabled .scroll-animate.slide-left:not(.animated) {
     opacity: 0;
     transform: translateX(-50px);
 }
 
-.scroll-animate.slide-left.animated {
-    opacity: 1;
+.animations-enabled .scroll-animate.slide-left.animated {
+    opacity: 1 !important;
     transform: translateX(0);
 }
 
-.scroll-animate.slide-right {
+.animations-enabled .scroll-animate.slide-right:not(.animated) {
     opacity: 0;
     transform: translateX(50px);
 }
 
-.scroll-animate.slide-right.animated {
-    opacity: 1;
+.animations-enabled .scroll-animate.slide-right.animated {
+    opacity: 1 !important;
     transform: translateX(0);
 }
 
-.scroll-animate.zoom-in {
+.animations-enabled .scroll-animate.zoom-in:not(.animated) {
     opacity: 0;
     transform: scale(0.8);
 }
 
-.scroll-animate.zoom-in.animated {
-    opacity: 1;
+.animations-enabled .scroll-animate.zoom-in.animated {
+    opacity: 1 !important;
     transform: scale(1);
 }
 
