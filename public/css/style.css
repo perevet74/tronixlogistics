@@ -231,7 +231,7 @@ body {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    padding: 100px 0;
+    padding: 100px 0 200px;
     opacity: 0;
     visibility: hidden;
     transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
@@ -288,7 +288,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
-    z-index: 10;
+    z-index: 15;
     pointer-events: none;
 }
 
@@ -337,12 +337,23 @@ body {
 /* Slider Dots */
 .slider-dots {
     position: absolute;
-    bottom: 30px;
+    bottom: 140px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 10px;
-    z-index: 10;
+    z-index: 15;
+    pointer-events: none;
+}
+
+.slider-dots .dot {
+    pointer-events: all;
+}
+
+@media (max-width: 768px) {
+    .slider-dots {
+        bottom: 180px;
+    }
 }
 
 .dot {
@@ -439,20 +450,37 @@ body {
     margin-left: 10px;
 }
 
-/* Track Section Main */
-.track-section-main {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    color: #ffffff;
-    padding: 50px 0;
-    text-align: center;
+/* Track Form on Hero Banner */
+.hero-track-form {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    right: 0;
+    z-index: 6;
+    width: 100%;
+    pointer-events: none;
 }
 
-.track-section-main h2 {
+.hero-track-form .container,
+.hero-track-form form,
+.hero-track-form input,
+.hero-track-form button {
+    pointer-events: all;
+}
+
+.hero-track-form .container {
+    position: relative;
+}
+
+.hero-track-form h2 {
     font-size: 36px;
     font-weight: 700;
     margin-bottom: 25px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .track-form-main {
@@ -466,23 +494,46 @@ body {
 
 .track-form-main input {
     flex: 1;
-    min-width: 300px;
+    min-width: 250px;
     padding: 15px 20px;
     border: none;
     border-radius: 4px;
     font-size: 16px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.95);
     color: #333333;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
 .track-form-main input:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(255,107,53,0.2);
+    box-shadow: 0 0 0 3px rgba(255,107,53,0.4), 0 4px 15px rgba(0,0,0,0.3);
+    background: #ffffff;
 }
 
 .track-form-main button {
     padding: 15px 40px;
     white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.track-form-main button:hover {
+    box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+}
+
+/* Track Section Main (kept for backward compatibility if used elsewhere) */
+.track-section-main {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: #ffffff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.track-section-main h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Features Banner */
@@ -2036,16 +2087,40 @@ body {
 
 @media (max-width: 480px) {
     .hero-slider {
-        min-height: 400px;
+        min-height: 500px;
     }
 
     .hero-slide {
-        min-height: 400px;
-        padding: 40px 0;
+        min-height: 500px;
+        padding: 60px 0 180px;
     }
 
     .hero-content h1 {
         font-size: 28px;
+    }
+
+    .hero-track-form {
+        bottom: 20px;
+    }
+
+    .hero-track-form h2 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .track-form-main {
+        flex-direction: column;
+        gap: 10px;
+        padding: 0 15px;
+    }
+
+    .track-form-main input {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .track-form-main button {
+        width: 100%;
     }
 
     .slider-btn {

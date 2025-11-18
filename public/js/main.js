@@ -85,25 +85,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const slider = document.querySelector('.hero-slider');
     if (slider) {
         const slides = slider.querySelectorAll('.hero-slide');
-        const dots = slider.querySelectorAll('.dot');
-        const prevBtn = slider.querySelector('.slider-btn.prev');
-        const nextBtn = slider.querySelector('.slider-btn.next');
+        // Find initial active slide
         let currentSlide = 0;
+        slides.forEach((slide, index) => {
+            if (slide.classList.contains('active')) {
+                currentSlide = index;
+            }
+        });
+        
         let autoSlideInterval;
         let touchStartX = 0;
         let touchEndX = 0;
 
         function showSlide(index) {
-            // Remove active class from all slides and dots
+            // Remove active class from all slides
             slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
 
-            // Add active class to current slide and dot
+            // Add active class to current slide
             if (slides[index]) {
                 slides[index].classList.add('active');
-            }
-            if (dots[index]) {
-                dots[index].classList.add('active');
             }
 
             currentSlide = index;
@@ -128,62 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearInterval(autoSlideInterval);
             }
         }
-
-        // Event listeners for buttons
-        if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                nextSlide();
-                stopAutoSlide();
-                startAutoSlide();
-            });
-            // Touch support
-            nextBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                nextSlide();
-                stopAutoSlide();
-                startAutoSlide();
-            });
-        }
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                prevSlide();
-                stopAutoSlide();
-                startAutoSlide();
-            });
-            // Touch support
-            prevBtn.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                prevSlide();
-                stopAutoSlide();
-                startAutoSlide();
-            });
-        }
-
-        // Dot navigation
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                showSlide(index);
-                stopAutoSlide();
-                startAutoSlide();
-            });
-            // Touch support
-            dot.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                showSlide(index);
-                stopAutoSlide();
-                startAutoSlide();
-            });
-        });
 
         // Touch swipe support for mobile
         slider.addEventListener('touchstart', (e) => {
