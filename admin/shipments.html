@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Shipments - Admin</title>
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <style>
         .admin-header {
             background: #2c3e50;
@@ -106,7 +106,7 @@
                 <a href="shipments.html" class="active">Shipments</a>
                 <a href="add-shipment.html">Add Shipment</a>
                 <a href="quotes.html">Quotes</a>
-                <a href="login.html">Logout</a>
+                <a href="login.html" onclick="logout()">Logout</a>
             </div>
         </div>
     </div>
@@ -226,5 +226,32 @@
             </table>
         </div>
     </div>
+    <script>
+        // Authentication check - redirect to login if not authenticated
+        (function() {
+            if (sessionStorage.getItem('adminAuthenticated') !== 'true') {
+                window.location.href = 'login.html';
+            }
+        })();
+
+        // Logout function
+        function logout() {
+            sessionStorage.removeItem('adminAuthenticated');
+            sessionStorage.removeItem('adminUsername');
+            sessionStorage.removeItem('adminLoginTime');
+            window.location.href = 'login.html';
+        }
+
+        // Handle logout link clicks
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutLink = document.querySelector('a[href="login.html"]');
+            if (logoutLink && logoutLink.textContent.includes('Logout')) {
+                logoutLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    logout();
+                });
+            }
+        });
+    </script>
 </body>
 </html>

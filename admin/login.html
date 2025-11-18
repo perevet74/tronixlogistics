@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Tronixs Express</title>
-    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
     <style>
         .login-container {
             min-height: 100vh;
@@ -91,11 +91,31 @@
         </div>
     </div>
     <script>
+        // Check if already logged in, redirect to dashboard
+        if (sessionStorage.getItem('adminAuthenticated') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // For demo purposes, redirect to dashboard
-            // In production, this would validate credentials first
-            window.location.href = 'dashboard.html';
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // Validate credentials
+            if (username === 'admin' && password === 'admin123') {
+                // Set authentication flag in sessionStorage (works offline and online)
+                sessionStorage.setItem('adminAuthenticated', 'true');
+                sessionStorage.setItem('adminUsername', username);
+                sessionStorage.setItem('adminLoginTime', new Date().getTime().toString());
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Invalid username or password. Please try again.');
+                document.getElementById('password').value = '';
+                document.getElementById('username').focus();
+            }
         });
     </script>
 </body>
