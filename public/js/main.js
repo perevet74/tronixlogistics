@@ -579,5 +579,59 @@ document.addEventListener('DOMContentLoaded', function() {
         // Scroll to results
         resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    // Scroll Animation Handler
+    function initScrollAnimations() {
+        const animatedElements = document.querySelectorAll('.scroll-animate');
+        
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+            
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= windowHeight + 100 && // Trigger 100px before element enters viewport
+                rect.right <= windowWidth
+            );
+        }
+
+        // Function to handle scroll animations
+        function handleScrollAnimations() {
+            animatedElements.forEach(element => {
+                if (isInViewport(element) && !element.classList.contains('animated')) {
+                    element.classList.add('animated');
+                } else if (!isInViewport(element) && element.classList.contains('animated')) {
+                    // Remove animated class when scrolling back up (for reverse animation)
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    const elementTop = element.getBoundingClientRect().top + scrollTop;
+                    
+                    if (scrollTop < elementTop - window.innerHeight) {
+                        element.classList.remove('animated');
+                    }
+                }
+            });
+        }
+
+        // Initial check
+        handleScrollAnimations();
+
+        // Throttle scroll event for better performance
+        let ticking = false;
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    handleScrollAnimations();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
+    // Initialize scroll animations
+    initScrollAnimations();
 });
 
