@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Tronixs Express Logistics</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-content">
+                <div class="contact-info">
+                    <span>📧 info@tronixssexpress.com</span>
+                    <span>📍 1735 E 7th St, Long Beach, CA 90813, United States</span>
+                </div>
+                <div class="phone-info">
+                    <span>📞 +1 (510)-224-3487</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>Tronixs Express</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="services.html">Service</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="services.html#road">Road Freight</a></li>
+                        <li><a href="services.html#ocean">Ocean Freight</a></li>
+                        <li><a href="services.html#air">Air Freight</a></li>
+                        <li><a href="services.html#warehouse">Smart Warehousing</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="technology.html">Technology</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="technology.html#infrastructure">infrastructure data security</a></li>
+                        <li><a href="technology.html#integration">data integration</a></li>
+                        <li><a href="technology.html#visibility">visibility reporting</a></li>
+                        <li><a href="technology.html#analytics">data science analytics</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><a href="track.html" class="track-btn">Track & Trace</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>Get in touch with our team</p>
+        </div>
+    </section>
+
+    <!-- Contact Detail Page -->
+    <section class="contact-detail-page">
+        <div class="container">
+            <div class="contact-info-section">
+                <h2>Contact Information</h2>
+                <div class="contact-info-card">
+                    <div class="contact-item-large">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Address</h4>
+                            <p>1735 E 7th St, Long Beach, CA 90813, United States</p>
+                        </div>
+                    </div>
+                    <div class="contact-item-large">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@tronixssexpress.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item-large">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (510)-224-3487</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-form-section">
+                <h2>Request For A Quote</h2>
+                <form id="quoteFormContact" class="quote-form-detailed">
+                    <div class="form-section">
+                        <label class="section-label">Personal Data</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" name="phone" placeholder="Phone" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <label class="section-label">Route Data</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" name="origin" placeholder="Origin" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="destination" placeholder="Destination" required>
+                            </div>
+                            <div class="form-group">
+                                <select name="service_type">
+                                    <option value="">Select Service Type</option>
+                                    <option value="Air Freight">Air Freight</option>
+                                    <option value="Land Freight">Land Freight</option>
+                                    <option value="Ocean Freight">Ocean Freight</option>
+                                    <option value="Rail Freight">Rail Freight</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <label class="section-label">Shipment Data</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" name="weight" placeholder="Weight">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="dimensions" placeholder="Dimensions">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="additional_info" placeholder="Additional Information" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <label class="section-label">Additional Information</label>
+                        <div class="checkbox-group-detailed">
+                            <label><input type="checkbox" name="fragile"> Fragile</label>
+                            <label><input type="checkbox" name="explosive"> Explosive / Reactive</label>
+                            <label><input type="checkbox" name="discrete"> Discrete Shipping</label>
+                            <label><input type="checkbox" name="express"> Express Delivery</label>
+                            <label><input type="checkbox" name="insurance"> Insurance</label>
+                            <label><input type="checkbox" name="packaging"> Packaging</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Request For A Quote</button>
+                </form>
+                <div id="quoteMessageContact" class="message"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="services.html#road">Road Freight</a></li>
+                        <li><a href="services.html#ocean">Ocean Freight</a></li>
+                        <li><a href="services.html#air">Air Freight</a></li>
+                        <li><a href="services.html#warehouse">Smart Warehousing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li><a href="technology.html#infrastructure">infrastructure data security</a></li>
+                        <li><a href="technology.html#integration">data integration</a></li>
+                        <li><a href="technology.html#visibility">visibility reporting</a></li>
+                        <li><a href="technology.html#analytics">data science analytics</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="contact.html">Get A Quote</a></li>
+                        <li><a href="track.html">Track & Trace</a></li>
+                        <li><a href="about.html">Career</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Address: 1735 E 7th St, Long Beach, CA 90813, United States</p>
+                    <p>Website: www.tronixssexpress.com</p>
+                    <p>Email: info@tronixssexpress.com</p>
+                    <p>Phone: +1 (510)-224-3487</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright @ 2021 Tronixs Express Logistics.All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Contact page quote form handler
+        document.addEventListener('DOMContentLoaded', function() {
+            const quoteFormContact = document.getElementById('quoteFormContact');
+            if (quoteFormContact) {
+                quoteFormContact.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    const data = {
+                        name: formData.get('name') || '',
+                        email: formData.get('email') || '',
+                        phone: formData.get('phone') || '',
+                        origin: formData.get('origin') || '',
+                        destination: formData.get('destination') || '',
+                        service_type: formData.get('service_type') || '',
+                        weight: formData.get('weight') || '',
+                        dimensions: formData.get('dimensions') || '',
+                        additional_info: formData.get('additional_info') || '',
+                        fragile: formData.get('fragile') ? true : false,
+                        explosive: formData.get('explosive') ? true : false,
+                        discrete: formData.get('discrete') ? true : false,
+                        express: formData.get('express') ? true : false,
+                        insurance: formData.get('insurance') ? true : false,
+                        packaging: formData.get('packaging') ? true : false
+                    };
+
+                    fetch('api/quote.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data)
+                    })
+                    .then(response => response.json())
+                    .then(result => {
+                        const messageDiv = document.getElementById('quoteMessageContact');
+                        if (messageDiv) {
+                            messageDiv.className = 'message ' + (result.success ? 'success' : 'error');
+                            messageDiv.textContent = result.message || (result.success ? 'Quote request submitted successfully!' : 'Error submitting quote request.');
+                        }
+                        if (result.success) {
+                            quoteFormContact.reset();
+                        }
+                    })
+                    .catch(error => {
+                        const messageDiv = document.getElementById('quoteMessageContact');
+                        if (messageDiv) {
+                            messageDiv.className = 'message error';
+                            messageDiv.textContent = 'Error submitting quote request. Please try again.';
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
