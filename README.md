@@ -56,7 +56,8 @@ A complete clone of the Tronixs Express Logistics website built with PHP, MySQL,
 
 5. **Access the Website:**
    - Frontend: `http://localhost/your-project-folder/public/`
-   - Admin Login: `http://localhost/your-project-folder/admin/login.php`
+   - Admin Login (HTML - Design Preview): `http://localhost/your-project-folder/admin/login.html`
+   - Admin Login (PHP - Full Functionality): `http://localhost/your-project-folder/admin/login.php` (if PHP files are restored)
 
 ## Default Admin Credentials
 
@@ -98,14 +99,13 @@ A complete clone of the Tronixs Express Logistics website built with PHP, MySQL,
 ```
 .
 ├── admin/
-│   ├── login.php          # Admin login page
-│   ├── auth.php           # Authentication check
-│   ├── dashboard.php      # Admin dashboard
-│   ├── shipments.php      # View all shipments
-│   ├── add-shipment.php   # Add new shipment
-│   ├── edit-shipment.php  # Edit shipment and add tracking history
-│   ├── quotes.php         # View quote requests
-│   └── logout.php         # Logout handler
+│   ├── login.html         # Admin login page (HTML - Design Preview)
+│   ├── dashboard.html     # Admin dashboard (HTML - Design Preview)
+│   ├── shipments.html     # View all shipments (HTML - Design Preview)
+│   ├── add-shipment.html  # Add new shipment (HTML - Design Preview)
+│   ├── edit-shipment.html # Edit shipment (HTML - Design Preview)
+│   └── quotes.html        # View quote requests (HTML - Design Preview)
+│   Note: PHP files were converted to HTML. For full functionality, restore PHP files.
 ├── api/
 │   ├── track.php          # Tracking API endpoint
 │   └── quote.php          # Quote submission API

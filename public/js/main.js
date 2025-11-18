@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const nextBtn = slider.querySelector('.slider-btn.next');
         let currentSlide = 0;
         let autoSlideInterval;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
         function showSlide(index) {
             // Remove active class from all slides and dots
@@ -127,9 +129,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Event listeners
+        // Event listeners for buttons
         if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
+            nextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                nextSlide();
+                stopAutoSlide();
+                startAutoSlide();
+            });
+            // Touch support
+            nextBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 nextSlide();
                 stopAutoSlide();
                 startAutoSlide();
@@ -137,7 +149,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
+            prevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                prevSlide();
+                stopAutoSlide();
+                startAutoSlide();
+            });
+            // Touch support
+            prevBtn.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 prevSlide();
                 stopAutoSlide();
                 startAutoSlide();
@@ -146,16 +168,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Dot navigation
         dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
+            dot.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                showSlide(index);
+                stopAutoSlide();
+                startAutoSlide();
+            });
+            // Touch support
+            dot.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
                 showSlide(index);
                 stopAutoSlide();
                 startAutoSlide();
             });
         });
 
-        // Pause on hover
-        slider.addEventListener('mouseenter', stopAutoSlide);
-        slider.addEventListener('mouseleave', startAutoSlide);
+        // Touch swipe support for mobile
+        slider.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        slider.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum swipe distance
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    prevSlide();
+                }
+                stopAutoSlide();
+                startAutoSlide();
+            }
+        }
+
+        // Pause on hover (desktop only)
+        if (window.innerWidth > 768) {
+            slider.addEventListener('mouseenter', stopAutoSlide);
+            slider.addEventListener('mouseleave', startAutoSlide);
+        }
 
         // Start auto-slide
         startAutoSlide();
